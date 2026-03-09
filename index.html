@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body>
+    <form>
+        Hora: <input type="number" id="hora" name="hora" min="0" max="23" value="0">
+        Minutos: <input type="number" id="min" name="min" min="0" max="59" value="0">
+        <input type="button" onclick="iniciar()" value="Enviar">
+    </form><br>
+    <legend id="pantalla"></legend><br>
+    <legend id="pantalla2"></legend>
+
+    <script>
+
+        
+        let hora = 0;
+        let min = 0;
+        let horaactual = 0;
+        let minactual = 0;
+        let intervalo;
+
+        function iniciar() {
+            hora = document.getElementById("hora").value;
+            min = document.getElementById("min").value;
+            actualizar();
+            intervalo = setInterval(actualizar, 60000);
+        }
+        function actualizar() {
+            let ahora = new Date();
+            horaactual = ahora.getHours();
+            minactual = ahora.getMinutes();
+            document.getElementById("pantalla").textContent = `${String(horaactual).padStart(2, '0')}:${String(minactual).padStart(2, '0')}`;
+            document.getElementById("pantalla2").textContent = `${String(hora).padStart(2, '0')}:${String(min).padStart(2, '0')}`;
+            if (parseInt(hora) === horaactual && parseInt(min) === minactual) {
+                document.body.style.backgroundColor = "#39FF14";
+            } else {
+                document.body.style.backgroundColor = "";
+            }
+        }
+
+    </script>
+</body>
